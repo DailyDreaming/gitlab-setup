@@ -1,0 +1,17 @@
+# Gitlab Infra Environment Variables.
+#
+# Source this file in your bash shell using "source environment".
+
+# Resolve the location of this file and set GITLAB_HOME to the root
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
+export GITLAB_HOME="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+
+set -a
+GOOGLE_PROJECT_ID='platform-dev'
+GOOGLE_REGION='us-central1'
+# TODO: check for GOOGLE_APPLICATION_CREDENTIALS
+
+GITLAB_SERVER_NAME='smallspark'
+TERRAFORM_BACKEND_STATE_BUCKET='terraform-gitlab-state-d3443c'
+set +a
