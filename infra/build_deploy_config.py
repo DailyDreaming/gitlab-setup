@@ -7,9 +7,15 @@ infra_root = os.path.abspath(os.path.dirname(__file__))
 
 env_vars_to_infra = [
     "GOOGLE_PROJECT_ID",
+    "GOOGLE_PROJECT_NAME",
     "GOOGLE_REGION",
-    "GOOGLE_APPLICATION_CREDENTIALS",
-    "GITLAB_SERVER_NAME"
+    "GOOGLE_ZONE",
+    "SECRETSTORE_GITHUB_APP",
+    "GITLAB_SERVER_NAME",
+    "GITLAB_USERNAME",
+    "EXTERNAL_URL",
+    "TERRAFORM_BACKEND_STATE_BUCKET",
+    "SECRETSTORE_SSH_KEYS"
 ]
 
 parser = argparse.ArgumentParser(description=__doc__)

@@ -17,7 +17,7 @@ github_login_config="gitlab_rails['omniauth_providers'] = [
   ]"
 
 config_file="/etc/gitlab/gitlab.rb"
-local_config_marker="### BEGIN ALLSPARK CONFIG"
+local_config_marker="### BEGIN GITLAB CONFIG"
 # This command removes the line containing ${local_config_marker}, and all following lines
 sudo sed -i -e "/${local_config_marker}/,\$d" ${config_file}
 sudo sed -i "s/^external_url.*/external_url 'https:\/\/${hostname}'/" ${config_file}

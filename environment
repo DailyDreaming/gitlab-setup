@@ -8,10 +8,19 @@ while [ -h "$SOURCE" ] ; do SOURCE="$(readlink "$SOURCE")"; done
 export GITLAB_HOME="$(cd -P "$(dirname "$SOURCE")" && pwd)"
 
 set -a
-GOOGLE_PROJECT_ID='platform-dev'
-GOOGLE_REGION='us-central1'
-# TODO: check for GOOGLE_APPLICATION_CREDENTIALS
+GOOGLE_PROJECT_NAME="platform-dev"
+GOOGLE_PROJECT_ID="platform-dev-178517"
+GOOGLE_REGION="us-west1"
+GOOGLE_ZONE="us-west1-b"
 
-GITLAB_SERVER_NAME='smallspark'
+# TODO: check for GOOGLE_APPLICATION_CREDENTIALS
+GOOGLE_APPLICATION_CREDENTIALS='/home/quokka/.credentials/platform-dev.json'
+
+SECRETSTORE_GITHUB_APP="gitlab_server-github_app"
+SECRETSTORE_SSH_KEYS="gitlab_server-ssh_keys"
+
+GITLAB_SERVER_NAME="smallspark"
+GITLAB_USERNAME="ubuntu"
+EXTERNAL_URL="test.ucsc-cgp-dev.org"
 TERRAFORM_BACKEND_STATE_BUCKET='terraform-gitlab-state-d3443c'
 set +a
