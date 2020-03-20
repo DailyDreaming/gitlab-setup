@@ -1,5 +1,4 @@
 resource "google_compute_instance" "smallspark" {
-  count = 1
   name = var.GITLAB_SERVER_NAME
   zone = var.GOOGLE_ZONE
   machine_type = "n1-standard-2"
@@ -12,7 +11,8 @@ resource "google_compute_instance" "smallspark" {
   network_interface {
     network = "default"
     access_config {
-      network_tier = "STANDARD"
+      network_tier = "PREMIUM"
+      nat_ip = google_compute_address.static_server_ip.address
     }
   }
 
@@ -31,24 +31,26 @@ resource "google_compute_instance" "smallspark" {
     sshKeys = "${var.GITLAB_USERNAME}:${local.public_ssh_key}"
   }
 
-  provisioner "file" {
-    source      = "install_gitlab.sh"
-    destination = "/tmp/install_gitlab.sh"
-  }
-
-  provisioner "file" {
-    source      = "config_gitlab_server.sh"
-    destination = "/tmp/config_gitlab_server.sh"
-  }
-
-  provisioner "remote-exec" {
-        inline = [
-            "chmod +x /tmp/install_gitlab.sh",
-            "chmod +x /tmp/config_gitlab_server.sh",
-            "/tmp/install_gitlab.sh",
-            "/tmp/config_gitlab_server.sh ${var.EXTERNAL_URL} ${local.github_client_id} ${local.github_client_secret}"
-        ]
-    }
+  // these timeout and so need to A. spin-wait for the instance B. put a dependency on this and C. extend timeout
+  // https://github.com/terraform-providers/terraform-provider-oci/issues/868
+  // provisioner "file" {
+  //   source      = "install_gitlab.sh"
+  //   destination = "/tmp/install_gitlab.sh"
+  // }
+  //
+  // provisioner "file" {
+  //   source      = "config_gitlab_server.sh"
+  //   destination = "/tmp/config_gitlab_server.sh"
+  // }
+  //
+  // provisioner "remote-exec" {
+  //       inline = [
+  //           "chmod +x /tmp/install_gitlab.sh",
+  //           "chmod +x /tmp/config_gitlab_server.sh",
+  //           "/tmp/install_gitlab.sh",
+  //           "/tmp/config_gitlab_server.sh ${var.EXTERNAL_URL} ${local.github_client_id} ${local.github_client_secret}"
+  //       ]
+  // }
 
   allow_stopping_for_update = true
   can_ip_forward = true
@@ -64,18 +66,22 @@ resource "google_compute_firewall" "gitlab-firewall" {
    ports    = ["22", "80", "443"]
  }
 
+ allow {
+   protocol = "udp"
+   ports    = ["22", "80", "443"]
+ }
+
  source_ranges = ["0.0.0.0/0"]
  target_tags = ["apply-gitlab-firewall"]  // apply firewall to any instance with this tag
+}
+
+resource "google_compute_address" "static_server_ip" {
+  name = "ipv4-address"
 }
 
 // Enable APIs
 resource "google_project_service" "compute" {
   service            = "compute.googleapis.com"
-  disable_on_destroy = false
-}
-
-resource "google_project_service" "gke" {
-  service            = "container.googleapis.com"
   disable_on_destroy = false
 }
 

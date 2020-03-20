@@ -11,7 +11,7 @@ github_login_config="gitlab_rails['omniauth_providers'] = [
       \"name\" => \"github\",
       \"app_id\" => \"${github_client_id}\",
       \"app_secret\" => \"${github_client_secret}\",
-	  \"url\" => \"https://github.com/\",
+	    \"url\" => \"https://github.com/\",
       \"args\" => { \"scope\" => \"user:email\" }
     }
   ]"
@@ -38,4 +38,13 @@ echo "${local_config_marker}" | sudo tee -a /etc/hosts
 echo "127.0.0.1 ${hostname}" | sudo tee -a /etc/hosts
 sudo hostname ${hostname}
 
-sudo gitlab-ctl reconfigure ; sudo gitlab-ctl restart
+# echo "nginx['redirect_http_to_https'] = true" | sudo tee -a ${config_file}
+# echo "nginx['redirect_http_to_https_port'] = 80" | sudo tee -a ${config_file}
+# echo "echo \"nginx['custom_gitlab_server_config'] = \"location /.well-known/acme-challenge/ {\n root /var/opt/gitlab/nginx/www/; \n}\n\"" | sudo tee -a ${config_file}
+echo "letsencrypt['enable'] = true" | sudo tee -a ${config_file}
+echo "letsencrypt['auto_renew'] = true" | sudo tee -a ${config_file}
+echo "letsencrypt['auto_renew_hour'] = 0" | sudo tee -a ${config_file}
+echo "letsencrypt['auto_renew_minute'] = 30" | sudo tee -a ${config_file}
+echo "letsencrypt['auto_renew_day_of_month'] = \"*/4\"" | sudo tee -a ${config_file}
+
+# sudo gitlab-ctl reconfigure ; sudo gitlab-ctl restart

@@ -1,0 +1,25 @@
+imagePullPolicy: Always
+gitlabUrl: "https://biodata-integration-tests.net/"
+runnerRegistrationToken: ""
+concurrent: 10
+checkInterval: 30
+rbac:
+  create: false
+  serviceAccountName: tiller
+runners:
+  image: "ubuntu"
+  privileged: true
+  pollTimeout: 86400
+  outputLimit: 40960
+  namespace: bdc
+  serviceAccountName: tiller
+  builds:
+    cpuLimit: 4000m
+    memoryLimit: 15Gi
+    cpuRequests: 4000m
+    memoryRequests: 15Gi
+  services:
+    cpuLimit: 4000m
+    memoryLimit: 15Gi
+    cpuRequests: 4000m
+    memoryRequests: 15Gi

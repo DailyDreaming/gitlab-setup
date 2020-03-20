@@ -14,13 +14,13 @@ GOOGLE_REGION="us-west1"
 GOOGLE_ZONE="us-west1-b"
 
 # TODO: check for GOOGLE_APPLICATION_CREDENTIALS
-GOOGLE_APPLICATION_CREDENTIALS='/home/quokka/.credentials/platform-dev.json'
+# GOOGLE_APPLICATION_CREDENTIALS='/home/quokka/.credentials/platform-dev.json'
 
 SECRETSTORE_GITHUB_APP="gitlab_server-github_app"
 SECRETSTORE_SSH_KEYS="gitlab_server-ssh_keys"
 
 GITLAB_SERVER_NAME="smallspark"
 GITLAB_USERNAME="ubuntu"
-EXTERNAL_URL="test.ucsc-cgp-dev.org"
+EXTERNAL_URL="biodata-integration-tests.net"
 TERRAFORM_BACKEND_STATE_BUCKET='terraform-gitlab-state-d3443c'
 set +a
