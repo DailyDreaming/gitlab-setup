@@ -3,13 +3,14 @@ import gitlab
 import time
 import requests
 import json
+import os
 
-gitlab_server_ip = ''
+gitlab_server = os.environ['EXTERNAL_URL']
 private_token = ''
 github_username = ''
 github_email = ''
 
-gl = gitlab.Gitlab(f'http://{gitlab_server_ip}', private_token=private_token)
+gl = gitlab.Gitlab(f'http://{gitlab_server}', private_token=private_token)
 
 
 def get_github_user_id(github_username):

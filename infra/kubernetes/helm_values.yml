@@ -1,13 +1,13 @@
 imagePullPolicy: Always
 gitlabUrl: "https://biodata-integration-tests.net/"
-runnerRegistrationToken: ""
+runner token: ""
 concurrent: 10
 checkInterval: 30
 rbac:
   create: false
   serviceAccountName: tiller
 runners:
-  image: "ubuntu"
+  image: "ubuntu:18.04"
   privileged: true
   pollTimeout: 86400
   outputLimit: 40960

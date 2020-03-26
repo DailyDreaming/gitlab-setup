@@ -12,8 +12,7 @@ ifeq ($(shell which jq),)
 $(error Please install jq using "apt-get install jq" or "brew install jq")
 endif
 
-ifeq ($(findstring terraform, $(shell which terraform 2>&1)),)
-else ifeq ($(findstring Terraform v0.12.23, $(shell terraform --version 2>&1)),)
+ifeq ($(findstring Terraform v0.12.23, $(shell terraform --version 2>&1)),)
 $(error You must use Terraform v0.12.23, please check your terraform version.)
 endif
 

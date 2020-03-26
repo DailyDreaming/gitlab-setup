@@ -14,7 +14,7 @@ GOOGLE_REGION="us-west1"
 GOOGLE_ZONE="us-west1-b"
 
 # TODO: check for GOOGLE_APPLICATION_CREDENTIALS
-# GOOGLE_APPLICATION_CREDENTIALS='/home/quokka/.credentials/platform-dev.json'
+GOOGLE_APPLICATION_CREDENTIALS='/home/quokka/.credentials/platform-dev.json'
 
 SECRETSTORE_GITHUB_APP="gitlab_server-github_app"
 SECRETSTORE_SSH_KEYS="gitlab_server-ssh_keys"
