@@ -1,4 +1,4 @@
-Manually access this "API access" API or terraform can't access information about your access to APIs: https://console.developers.google.com/apis/api/serviceusage.googleapis.com/overview?project=513406676236
+Access the "API access" API or terraform can't access information about your access to APIs: https://console.developers.google.com/apis/api/serviceusage.googleapis.com/overview?project=513406676236
 
 Set up a virtualenv and install dependencies:
 
