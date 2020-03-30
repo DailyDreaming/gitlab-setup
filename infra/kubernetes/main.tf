@@ -1,6 +1,7 @@
 // GKE Cluster
 resource "google_container_cluster" "gitlab-cluster" {
   name               = "gitlab-cluster"
+  project = var.GOOGLE_PROJECT_ID
   location           = var.GOOGLE_REGION
 
   # We can't create a cluster with no node pool defined, but we want to only use
@@ -123,44 +124,44 @@ locals {
 
 // Documentation for this Helm Chart: https://docs.gitlab.com/runner/install/kubernetes.html
 resource "helm_release" "gitlab" {
-    name = "gitlab-runner"
-    chart = "gitlab-runner"
-    repository = data.helm_repository.gitlab_helm_repository.name
-    namespace = local.kube_namespace
-    timeout    = 600
+  name = "gitlab-runner"
+  chart = "gitlab-runner"
+  repository = data.helm_repository.gitlab_helm_repository.name
+  namespace = local.kube_namespace
+  timeout    = 600
 
-    values = [file("helm_values.yml")]
+  values = [file("helm_values.yml")]
 
-    set {
-        name = "runnerRegistrationToken"
-        value = local.gitlab_runner_token
-    }
+  set {
+    name = "runnerRegistrationToken"
+    value = local.gitlab_runner_token
+  }
 
-    set {
-        name = "gitlabUrl"
-        value = "https://${var.EXTERNAL_URL}/"
-    }
+  set {
+    name = "gitlabUrl"
+    value = "https://${var.EXTERNAL_URL}/"
+  }
 
-    set {
-        name = "rbac.serviceAccountName"
-        value = local.kube_service_account
-    }
+  set {
+    name = "rbac.serviceAccountName"
+    value = local.kube_service_account
+  }
 
-    set {
-        name = "runners.serviceAccountName"
-        value = local.kube_service_account
-    }
+  set {
+    name = "runners.serviceAccountName"
+    value = local.kube_service_account
+  }
 
-    set {
-        name = "runners.namespace"
-        value = local.kube_namespace
-    }
+  set {
+    name = "runners.namespace"
+    value = local.kube_namespace
+  }
 
-    depends_on = [
-      kubernetes_cluster_role_binding.tiller-admin,
-      kubernetes_storage_class.pd-ssd,
-      null_resource.sleep_for_cluster_fix_helm_6361,
-    ]
+  depends_on = [
+    kubernetes_cluster_role_binding.tiller-admin,
+    kubernetes_storage_class.pd-ssd,
+    null_resource.sleep_for_cluster_fix_helm_6361,
+  ]
 }
 
 
@@ -172,12 +173,14 @@ resource "null_resource" "sleep_for_cluster_fix_helm_6361" {
 }
 
 resource "google_compute_address" "static_cluster_ip" {
+  project = var.GOOGLE_PROJECT_ID
   name = "ipv4-address"
 }
 
-// Enable API
+// Enable APIs
 resource "google_project_service" "gke" {
   service            = "container.googleapis.com"
+  project = var.GOOGLE_PROJECT_ID
   disable_on_destroy = false
 }
 

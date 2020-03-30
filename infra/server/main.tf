@@ -1,5 +1,6 @@
 resource "google_compute_instance" "smallspark" {
   name = var.GITLAB_SERVER_NAME
+  project = var.GOOGLE_PROJECT_ID
   zone = var.GOOGLE_ZONE
   machine_type = "n1-standard-2"
   boot_disk {
@@ -58,40 +59,45 @@ resource "google_compute_instance" "smallspark" {
 }
 
 resource "google_compute_firewall" "gitlab-firewall" {
- name    = "gitlab-firewall"
- network = "default"
+  name    = "gitlab-firewall"
+  project = var.GOOGLE_PROJECT_ID
+  network = "default"
 
- allow {
-   protocol = "tcp"
-   ports    = ["22", "80", "443"]
- }
+  allow {
+    protocol = "tcp"
+    ports    = ["22", "80", "443"]
+  }
 
- allow {
-   protocol = "udp"
-   ports    = ["22", "80", "443"]
- }
+  allow {
+    protocol = "udp"
+    ports    = ["22", "80", "443"]
+  }
 
- source_ranges = ["0.0.0.0/0"]
- target_tags = ["apply-gitlab-firewall"]  // apply firewall to any instance with this tag
+  source_ranges = ["0.0.0.0/0"]
+  target_tags = ["apply-gitlab-firewall"]  // apply firewall to any instance with this tag
 }
 
 resource "google_compute_address" "static_server_ip" {
   name = "ipv4-address"
+  project = var.GOOGLE_PROJECT_ID
 }
 
 // Enable APIs
 resource "google_project_service" "compute" {
   service            = "compute.googleapis.com"
+  project = var.GOOGLE_PROJECT_ID
   disable_on_destroy = false
 }
 
 resource "google_project_service" "service_networking" {
   service            = "servicenetworking.googleapis.com"
+  project = var.GOOGLE_PROJECT_ID
   disable_on_destroy = false
 }
 
 resource "google_project_service" "cloudresourcemanager" {
   service            = "cloudresourcemanager.googleapis.com"
+  project = var.GOOGLE_PROJECT_ID
   disable_on_destroy = false
 }
 
