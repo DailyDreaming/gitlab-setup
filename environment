@@ -18,6 +18,7 @@ GOOGLE_APPLICATION_CREDENTIALS='/home/quokka/.credentials/platform-dev.json'
 
 SECRETSTORE_GITHUB_APP="gitlab_server-github_app"
 SECRETSTORE_SSH_KEYS="gitlab_server-ssh_keys"
+SECRETSTORE_RUNNER_TOKEN="gitlab_server-runner_token"
 
 GITLAB_SERVER_NAME="smallspark"
 GITLAB_USERNAME="ubuntu"

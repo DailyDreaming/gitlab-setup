@@ -1,25 +1,28 @@
-imagePullPolicy: Always
-gitlabUrl: "https://biodata-integration-tests.net/"
-runner token: ""
-concurrent: 10
+## defaults to image: gitlab/gitlab-runner:alpine-${current_version}
+imagePullPolicy: IfNotPresent
+concurrent: 20
 checkInterval: 30
+terminationGracePeriodSeconds: 3600
+unregisterRunners: true
 rbac:
-  create: false
-  serviceAccountName: tiller
+    create: true
+    clusterWideAccess: true
 runners:
-  image: "ubuntu:18.04"
-  privileged: true
-  pollTimeout: 86400
-  outputLimit: 40960
-  namespace: bdc
-  serviceAccountName: tiller
-  builds:
-    cpuLimit: 4000m
-    memoryLimit: 15Gi
-    cpuRequests: 4000m
-    memoryRequests: 15Gi
-  services:
-    cpuLimit: 4000m
-    memoryLimit: 15Gi
-    cpuRequests: 4000m
-    memoryRequests: 15Gi
+    image: ubuntu:16.04
+    privileged: true
+    pollTimeout: 180
+    outputLimit: 40960
+    runUntagged: true
+    locked: false
+    # tags: ""
+    # requestConcurrency: 1
+    builds:
+      cpuLimit: 4000m
+      memoryLimit: 15Gi
+      cpuRequests: 4000m
+      memoryRequests: 15Gi
+    services:
+      cpuLimit: 4000m
+      memoryLimit: 15Gi
+      cpuRequests: 4000m
+      memoryRequests: 15Gi

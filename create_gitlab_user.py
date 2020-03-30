@@ -6,6 +6,7 @@ import json
 import os
 
 gitlab_server = os.environ['EXTERNAL_URL']
+
 private_token = ''
 github_username = ''
 github_email = ''

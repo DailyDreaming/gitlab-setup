@@ -14,3 +14,7 @@ Create Google secrets for github app credentials and an ssh keys.
 
 SECRETSTORE_GITHUB_APP="gitlab_server-github_app"
 SECRETSTORE_SSH_KEYS="gitlab_server-ssh_keys"
+
+gcloud secrets create gitlab_server-runner_token --data-file="/home/quokka/backup/gitlab_runner_token.json" --replication-policy=automatic
+
+sudo apt-get update && sudo apt-get install gitlab-ee

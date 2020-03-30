@@ -15,7 +15,8 @@ env_vars_to_infra = [
     "GITLAB_USERNAME",
     "EXTERNAL_URL",
     "TERRAFORM_BACKEND_STATE_BUCKET",
-    "SECRETSTORE_SSH_KEYS"
+    "SECRETSTORE_SSH_KEYS",
+    "SECRETSTORE_RUNNER_TOKEN"
 ]
 
 parser = argparse.ArgumentParser(description=__doc__)
@@ -32,7 +33,7 @@ autogen_message = textwrap.dedent(
 
 terraform_providers = autogen_message + textwrap.dedent(
     f"""
-    provider "google" {{
+    provider "google-beta" {{
       credentials = file("{os.environ["GOOGLE_APPLICATION_CREDENTIALS"]}")
       project     = "{os.environ["GOOGLE_PROJECT_ID"]}"
       region      = "{os.environ["GOOGLE_REGION"]}"
