@@ -12,7 +12,7 @@ Prior to installation, you will need to create a few resources:
 # Set Up a Domain
 First, my organization forbids access to google's domain service for some reason, so I had to register my domain elsewhere.  There should be no reason why this couldn't be handled in terraform for a google domain, I just could not do so for institutional reasons.  So setting this up takes a little more effort:
 
-1. Register a domain somewhere.  I chose AWS's Route 53 because it was easy and available, but any provider should be fine.  AWS said it might take up to 3 days to register, but in reality it took about 3 minutes.
+1. Register a domain somewhere, any provider should be fine.  My provider said it might take up to 3 days to register, but in reality it took about 3 minutes.
 1. Once the server is spun up, it will have a static IP and you will have to come back to this domain and add a "Record Set".  Use a simple record set type A (the other record sets NS and SOA should already exist and have been created for you; don't touch these), adding the IPv4 address, and a TTL (I choose the default, which was 300 seconds).  Once this is done, this won't work immediately, but after a short wait, your hosted gitlab server login should appear at this domain.
 
 # Set Up an SSH Key Pair as a Google Secret
