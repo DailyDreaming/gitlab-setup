@@ -41,7 +41,7 @@ Note, make sure the same as `SECRETSTORE_SSH_KEYS`.
 
 ### Set Up an Github App Client Key Pair as a Google Secret
 
-#### TODO: Write Steps to create a Github App Client Key Pair
+**TODO: Write Steps to create a Github App Client Key Pair**
 
 ```
 gcloud secrets create gitlab_server-github_app --data-file="github_keys.json" --replication-policy=automatic
@@ -65,4 +65,4 @@ Run `make all` from the root to populate all provider information and variable f
 
 Run `make apply` to create the server and cluster.
 
-#### TODO: Additional Steps to register the runner.
+**TODO: Additional Steps to register the runner.**
