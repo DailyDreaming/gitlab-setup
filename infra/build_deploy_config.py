@@ -33,7 +33,7 @@ autogen_message = textwrap.dedent(
 
 terraform_providers = autogen_message + textwrap.dedent(
     f"""
-    provider "google-beta" {{
+    provider "google" {{
       credentials = file("{os.environ["GOOGLE_APPLICATION_CREDENTIALS"]}")
       project     = "{os.environ["GOOGLE_PROJECT_ID"]}"
       region      = "{os.environ["GOOGLE_REGION"]}"

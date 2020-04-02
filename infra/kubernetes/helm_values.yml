@@ -14,8 +14,6 @@ runners:
     outputLimit: 40960
     runUntagged: true
     locked: false
-    # tags: ""
-    # requestConcurrency: 1
     builds:
       cpuLimit: 4000m
       memoryLimit: 15Gi
