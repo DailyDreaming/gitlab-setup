@@ -1,4 +1,4 @@
-# Gitlab Setup in GCE/GKE
+## Gitlab Setup in GCE/GKE
 
 This project stands up a self-hosted gitlab server and kubernetes cluster (which serves CI/CD test runners) using google's cloud platform in terraform.
 
