@@ -20,3 +20,4 @@ clean:
 	$(MAKE) -C infra clean-all
 
 .PHONY: init deploy plan destroy clean
+
