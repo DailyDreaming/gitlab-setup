@@ -5,7 +5,7 @@ This project stands up a self-hosted gitlab server and kubernetes cluster (which
 This server is intended to run CI/CD for any github repository.  It consists of a google cloud-hosted server and kubernetes cluster.  The server itself is a small `n1-standard-2` instance, installed with gitlab-ee.  A gke kubernetes cluster is then spun up separately and registered to the server as the runner pool.  If a github repository is registered and mirrored, then any commit made to the parent github repository will send an event to the mirrored gitlab repository and trigger the kubernetes cluster to spin up a pod to run tests according to that repository's `.gitlab-ci.yml` config (see: https://docs.gitlab.com/ee/ci/yaml/).
 
 Note:
- - This installs gitlab-ee (not the community edition), which requires a license key at some point (it will work after installation but some features will be disabled).  The main feature gitlab-ee provides that the community edition does not is github repo mirroring.
+ - This installs gitlab-ee (not the community edition), which requires a license key at some point (it will work after installation but some features will be disabled).  The main feature gitlab-ee provides that the community edition does not is github repo mirroring.  Open source projects can apply for a free license.
 
 Prior to installation, you will need to create a few resources:
 
