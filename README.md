@@ -1,6 +1,4 @@
-Work in Progress...
-
-TODO: Reasonable readme.
+TODO: Write a reasonable readme.
 
 Access the "API access" API or terraform can't access information about your access to APIs: https://console.developers.google.com/apis/api/serviceusage.googleapis.com/overview?project=513406676236
 
