@@ -1,7 +1,7 @@
 // GKE Cluster
 resource "google_container_cluster" "gitlab-cluster" {
   name               = "gitlab-cluster"
-  project = var.GOOGLE_PROJECT_ID
+  project            = var.GOOGLE_PROJECT_ID
   location           = var.GOOGLE_REGION
 
   # We can't create a cluster with no node pool defined, but we want to only use
